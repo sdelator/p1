@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "permissions.h"
-#include <strings.h>
+#include <string.h>
 /*
 typedef struct Dir
 {
@@ -23,7 +23,7 @@ void showPath();
 */
 void createDirectory(Directory *Dire, const char *name[], int time, int umask) {
 
-	Dire->d_name = *name;
+	strncpy(*(Dire->d_name),*name,strlen(*name));
 	Dire->time = time;
 	Dire->exist_subdir = 0;
 	Permissions *permissions=(Permissions*)malloc(sizeof(Permissions));
@@ -37,34 +37,47 @@ void showPath(Directory *Dir)
 
 void ls(Directory *Dir,int argCount,const char *arguments[]){
 	if(argCount == 1){
-	  strcmp("-l\n", arguments);
-	  printPermissions(Dir->subdir->perm);
+	  strcmp("-l\n", *arguments);
+	 // printPermissions(Dir->subdir->perm);
 	}//if
 }//ls
 
 void mkdir(Directory *Dir, int argCount, const char *arguments[]){
-	//CHECK IF 3 DIR
-	if(Dir->exist_subdir == 3){
-		printf("mkdir: %s already contains the maximum number of directories\n", Dir->d_name); 
-		Directory *subdirectory = (Directory *) malloc (sizeof(Directory));
-	}//if
+	// if there are multiple arguments
+	if (argCount != 1)
+		printf("usage: mkdir directoryName");
+	else {
+		//CHECK IF 3 DIR
+		if(Dir->exist_subdir == 3){
+			printf("mkdir: %s already contains the maximum number of directories\n", Dir->d_name); 
+			Directory *subdirectory = (Directory *) malloc (sizeof(Directory));
+		}//if
   
-	else {	Directory *subdirectory = (Directory *) malloc (sizeof(Directory)); 
-		subdirectory->exist_subdir ++;
-		subdirectory->d_name = *arguments;
+		else {	Directory *subdirectory = (Directory *) malloc (sizeof(Directory)); 
+			subdirectory->exist_subdir ++;
+//			subdirectory->d_name = *arguments;
 		}//else
 	
-//	char *d_name1 = malloc(strlen(name)+1);
-//	strcpy(d_name1, d_name); 
-		
-	//initalize stuff from struct in directory.h
-			
-//	funix->currentDirectory = (Directory*)malloc(sizeof(Directory));	
 
+	}//else
 }//mkdir
 
 void cd(Directory *Dir, int argCount, const char *arguments){
+	if (argCount != 1)
+		printf("usage: cd directoryName\n");
+	else
+	{
+
+		if ((strcmp(*(Dir->d_name), arguments)) == 0) //need if statement
+		{
+			//change directory
+		}//if
+		else
+			printf("cd: %s: No such file or directory.\n", arguments[0]);
+		// if argument isn't a child or a parent print ^
+		//if (arguments != 
+		// else 
+		Dir = Dir->subdir[0];
+	}
 }//cd
 
-//} Directory;
-//is this suppose to have the struct or does .h? 
