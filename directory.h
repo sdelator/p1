@@ -12,8 +12,8 @@ typedef struct Dir
 	int exist_subdir;
 
 	int *array[SUBDIR];//not sure if char or int
-	struct Dir *subdir, *parent, *root; //allocate array each time make subdir
-	struct Permission *perm;
+	Dir *subdir[SUBDIR], *parent, *root; //allocate array each time make subdir
+	Permissions *perm;
 	//when array is 3 or less it reallocates memory
 			
 }Directory;
