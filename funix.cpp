@@ -80,11 +80,13 @@ int processCommand(Funix *funix, char *command)
 
 	const char *cmd[]= {"exit","cd","ls","mkdir","umask"};
 	int cmdIndex = -1;
-	for (int i =0; i < 6; i++){
+	for (int i =0; i < 5; i++){
 		if(strcmp (str[0], cmd[i])== 0){   //compare two strings until both true
 			cmdIndex = i;
-			break;
+			i = 6;
 		}//if
+		
+		
 	}//for
 //new 
 
@@ -139,7 +141,7 @@ funix->umask = i;
 
 void writePrompt(Funix *funix)
 {	
-	//showPath(funix->currentDirectory);
+	showPath(funix->currentDirectory);
 	printf(" # "); //prints #
 
 }//writePrompt
