@@ -7,18 +7,19 @@
 
 void cd(Funix *funix, int argCount, const char *arguments[])
 {
-//	currentDirectory = currentDirectory -> cd(argCount, arguments);
+	//cd(funix -> currentDirectory, argCount, arguments);
+
 }//cd
 int eXit(Funix *funix, int argCount, const char *arguments[])
 {
 	if(argCount != 0){
 	  printf("usage: exit\n");
 	 
-	  return 0;
+	  return 1;
 	  }//if
 	else{
 
-		return 1;
+		return 0;
 	}//else
 }//eXit
 void getCommand(Funix *funix, char *command)
@@ -54,9 +55,7 @@ void mkdir(Funix *funix, int argCount, const char *arguments[])
 	}//if doesnt have 1 argument
  	//else 
 	//mkdir(funix->currentDirectory, arguments, funix->time++, funix umask);
-		//unsure about time++ and umask 
 	
-
 }//mkdir
 int processCommand(Funix *funix, char *command)
 {	
@@ -92,7 +91,7 @@ int processCommand(Funix *funix, char *command)
 	const char *arguments[] = {NULL}; //call here? 
 
 	switch(cmdIndex){
-		case 0: eXit(funix, argCount, arguments);//calls eXit	
+		case 0: cmdIndex = eXit(funix, argCount, arguments);//calls eXit	
 			break;
 		case 1: cd(funix, argCount, arguments);//calls cd
 			break;
